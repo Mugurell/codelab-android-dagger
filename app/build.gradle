@@ -19,14 +19,15 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'scabbard.gradle'
+    id 'com.squareup.anvil'
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 34
     defaultConfig {
         applicationId "com.example.android.dagger"
-        minSdkVersion 14
-        targetSdkVersion 32
+        minSdkVersion 26
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.example.android.dagger.MyCustomTestRunner"
@@ -53,6 +54,16 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    packagingOptions {
+        exclude 'kotlin/internal/internal.kotlin_builtins'
+        exclude 'kotlin/reflect/reflect.kotlin_builtins'
+        exclude 'kotlin/collections/collections.kotlin_builtins'
+        exclude 'kotlin/kotlin.kotlin_builtins'
+        exclude 'kotlin/coroutines/coroutines.kotlin_builtins'
+        exclude 'kotlin/annotation/annotation.kotlin_builtins'
+        exclude 'kotlin/ranges/ranges.kotlin_builtins'
+    }
 }
 
 scabbard {
@@ -61,25 +72,29 @@ scabbard {
     fullBindingGraphValidation true // default false
 }
 
-dependencies {
-    def dagger_version = "2.40.5"
+anvil {
+    generateDaggerFactories = true // default is false
+}
 
-    implementation "androidx.appcompat:appcompat:1.4.1"
-    implementation "androidx.core:core-ktx:1.7.0"
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+dependencies {
+    def dagger_version = "2.47"
+
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "androidx.core:core-ktx:1.12.0"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
 
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:3.4.6'
+    testImplementation 'org.mockito:mockito-core:4.4.0'
     testImplementation 'android.arch.core:core-testing:1.1.1'
 
-    def androidx_test_version = "1.4.0"
+    def androidx_test_version = "1.5.0"
     androidTestImplementation "androidx.test:runner:$androidx_test_version"
     androidTestImplementation "androidx.test:core-ktx:$androidx_test_version"
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
 }
