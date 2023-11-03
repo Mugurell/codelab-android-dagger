@@ -20,6 +20,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.login.LoginActivity
@@ -29,7 +30,8 @@ class SettingsActivity : AppCompatActivity() {
 
     // @Inject annotated fields will be provided by Dagger
     @Inject
-    lateinit var settingsViewModel: SettingsViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -37,6 +39,8 @@ class SettingsActivity : AppCompatActivity() {
         // and gets this Activity injected
         val userManager = (application as MyApplication).appComponent.userManager()
         userManager.userComponent!!.inject(this)
+
+        settingsViewModel = ViewModelProvider(this, viewModelFactory).get(SettingsViewModel::class.java)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
