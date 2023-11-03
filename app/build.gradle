@@ -18,6 +18,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'scabbard.gradle'
 }
 
 android {
@@ -52,6 +53,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
+
+scabbard {
+    enabled true // default false
+    failOnError true // default false
+    fullBindingGraphValidation true // default false
 }
 
 dependencies {
