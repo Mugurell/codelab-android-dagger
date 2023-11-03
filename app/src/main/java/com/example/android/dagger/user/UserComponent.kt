@@ -16,6 +16,7 @@
 
 package com.example.android.dagger.user
 
+import com.example.android.dagger.di.ViewModelModule
 import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.settings.SettingsActivity
 import dagger.Subcomponent
@@ -24,7 +25,7 @@ import dagger.Subcomponent
 // Classes annotated with @LoggedUserScope will have a unique instance in this Component
 @LoggedUserScope
 // Definition of a Dagger subcomponent
-@Subcomponent
+@Subcomponent(modules = [ViewModelModule::class])
 interface UserComponent {
 
     // Factory to create instances of UserComponent
