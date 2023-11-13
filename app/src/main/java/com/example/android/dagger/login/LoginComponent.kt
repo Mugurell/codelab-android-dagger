@@ -22,7 +22,7 @@ import dagger.Subcomponent
 // Scope annotation that the LoginComponent uses
 // Classes annotated with @ActivityScope will have a unique instance in this Component
 @ActivityScope
-// Definition of a Dagger subcomponent
+// Definition of a kotlin-inject subcomponent
 @Subcomponent
 interface LoginComponent {
 

@@ -30,7 +30,7 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    // @Inject annotated fields will be provided by Dagger
+    // @Inject annotated fields will be provided by kotlin-inject
     @Inject
     lateinit var mainViewModel: MainViewModel
 

@@ -31,7 +31,7 @@ class ApplicationTest {
         ActivityScenario.launch(MainActivity::class.java)
 
         // Should be in Registration/EnterDetails because the user is not registered
-        onView(withText("Register to Dagger World!")).check(matches(isDisplayed()))
+        onView(withText("Register to kotlin-inject World!")).check(matches(isDisplayed()))
         onView(withId(R.id.username)).perform(typeText("username"), closeSoftKeyboard())
         onView(withId(R.id.password)).perform(typeText("password"), closeSoftKeyboard())
         onView(withId(R.id.next)).perform(click())
@@ -49,7 +49,7 @@ class ApplicationTest {
         onView(withText("LOGOUT")).perform(click())
 
         // Login
-        onView(withText("Welcome to Dagger World!")).check(matches(isDisplayed()))
+        onView(withText("Welcome to kotlin-inject World!")).check(matches(isDisplayed()))
         onView(withId(R.id.password)).perform(typeText("password"), closeSoftKeyboard())
         onView(withText("LOGIN")).perform(click())
 
@@ -62,10 +62,10 @@ class ApplicationTest {
         onView(withText("LOGOUT")).perform(click())
 
         // Login
-        onView(withText("Welcome to Dagger World!")).check(matches(isDisplayed()))
+        onView(withText("Welcome to kotlin-inject World!")).check(matches(isDisplayed()))
         onView(withId(R.id.unregister)).perform(click())
 
         // Registration
-        onView(withText("Register to Dagger World!")).check(matches(isDisplayed()))
+        onView(withText("Register to kotlin-inject World!")).check(matches(isDisplayed()))
     }
 }

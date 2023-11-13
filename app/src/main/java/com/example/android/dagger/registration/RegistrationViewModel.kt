@@ -24,7 +24,7 @@ import javax.inject.Inject
  * RegistrationViewModel is the ViewModel that the Registration flow ([RegistrationActivity]
  * and fragments) uses to keep user's input data.
  *
- * @Inject tells Dagger how to provide instances of this type. Dagger also knows
+ * @Inject tells kotlin-inject how to provide instances of this type. kotlin-inject also knows
  * that UserManager is a dependency.
  */
 @ActivityScope

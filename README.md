@@ -1,6 +1,6 @@
-# Using Dagger in your Android app
+# Using kotlin-inject in your Android app
 
-This folder contains the source code for the "Using Dagger in your Android app" codelab.
+This folder contains the source code for the "Using kotlin-inject in your Android app" codelab.
 
 The codelab is built in multiple GitHub branches:
 * `main` is the codelab's starting point.
@@ -23,7 +23,7 @@ Implementing dependency injection provides you with the following advantages:
 # Pre-requisites
 * Experience with Kotlin syntax.
 * You understand Dependency Injection and know what the benefits
-of using Dagger in your Android app are.
+of using kotlin-inject in your Android app are.
 
 # Getting Started
 1. Install Android Studio, if you don't already have it.

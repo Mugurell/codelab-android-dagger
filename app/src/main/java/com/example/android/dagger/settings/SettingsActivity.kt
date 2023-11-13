@@ -28,7 +28,7 @@ import javax.inject.Inject
 
 class SettingsActivity : AppCompatActivity() {
 
-    // @Inject annotated fields will be provided by Dagger
+    // @Inject annotated fields will be provided by kotlin-inject
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var settingsViewModel: SettingsViewModel

@@ -33,7 +33,7 @@ import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
-    // @Inject annotated fields will be provided by Dagger
+    // @Inject annotated fields will be provided by kotlin-inject
     @Inject
     lateinit var loginViewModel: LoginViewModel
 

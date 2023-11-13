@@ -31,7 +31,7 @@ class RegistrationActivity : AppCompatActivity() {
     // Stores an instance of RegistrationComponent so that its Fragments can access it
     lateinit var registrationComponent: RegistrationComponent
 
-    // @Inject annotated fields will be provided by Dagger
+    // @Inject annotated fields will be provided by kotlin-inject
     @Inject
     lateinit var registrationViewModel: RegistrationViewModel
 
