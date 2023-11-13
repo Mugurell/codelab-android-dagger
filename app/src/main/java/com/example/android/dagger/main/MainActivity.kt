@@ -21,18 +21,20 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
+import com.example.android.dagger.di.applicationComponent
 import com.example.android.dagger.login.LoginActivity
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.settings.SettingsActivity
-import javax.inject.Inject
+import com.example.android.dagger.user.UserComponent
+import com.example.android.dagger.user.create
 
 class MainActivity : AppCompatActivity() {
 
-    // @Inject annotated fields will be provided by kotlin-inject
-    @Inject
-    lateinit var mainViewModel: MainViewModel
+    // If the MainActivity needs to be displayed, we get the MainViewModel from the application graph
+    private val mainViewModel: MainViewModel by lazy(LazyThreadSafetyMode.NONE) {
+        UserComponent.create(applicationComponent).mainViewModel
+    }
 
     /**
      * If the User is not registered, RegistrationActivity will be launched,
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Grabs instance of UserManager from the application graph
-        val userManager = (application as MyApplication).appComponent.userManager()
+        val userManager = applicationComponent.userManager
         if (!userManager.isUserLoggedIn()) {
             if (!userManager.isUserRegistered()) {
                 startActivity(Intent(this, RegistrationActivity::class.java))
@@ -54,10 +56,6 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             setContentView(R.layout.activity_main)
-
-            // If the MainActivity needs to be displayed, we get the UserComponent from the
-            // application graph and gets this Activity injected
-            userManager.userComponent!!.inject(this)
             setupViews()
         }
     }

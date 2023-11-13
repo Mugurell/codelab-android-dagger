@@ -25,26 +25,22 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
-import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
+import com.example.android.dagger.di.applicationComponent
 import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.RegistrationActivity
-import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
-    // @Inject annotated fields will be provided by kotlin-inject
-    @Inject
-    lateinit var loginViewModel: LoginViewModel
+    // Creates an instance of Login component by grabbing the factory from the app graph
+    // and injects this activity to that Component
+    private val loginViewModel: LoginViewModel by lazy(LazyThreadSafetyMode.NONE) {
+        LoginComponent.create(applicationComponent).loginViewModel
+    }
 
     private lateinit var errorTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        // Creates an instance of Login component by grabbing the factory from the app graph
-        // and injects this activity to that Component
-        (application as MyApplication).appComponent.loginComponent().create().inject(this)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 

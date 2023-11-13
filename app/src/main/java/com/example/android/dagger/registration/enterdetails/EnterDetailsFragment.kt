@@ -26,29 +26,12 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
-import javax.inject.Inject
 
 class EnterDetailsFragment : Fragment() {
-
-    /**
-     * RegistrationViewModel is used to set the username and password information (attached to
-     * Activity's lifecycle and shared between different fragments)
-     * EnterDetailsViewModel is used to validate the user input (attached to this
-     * Fragment's lifecycle)
-     *
-     * They could get combined but for the sake of the codelab, we're separating them so we have
-     * different ViewModels with different lifecycles.
-     *
-     * @Inject annotated fields will be provided by kotlin-inject
-     */
-    @Inject
     lateinit var registrationViewModel: RegistrationViewModel
-
-    @Inject
     lateinit var enterDetailsViewModel: EnterDetailsViewModel
 
     private lateinit var errorTextView: TextView
@@ -58,8 +41,18 @@ class EnterDetailsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        // Grabs the registrationComponent from the Activity and injects this Fragment
-        (activity as RegistrationActivity).registrationComponent.inject(this)
+        // Grabs the needed ViewModels from the Activity
+        with((activity as RegistrationActivity).registrationComponent) {
+            // RegistrationViewModel is used to set the username and password information (attached to
+            // Activity's lifecycle and shared between different fragments)
+            // EnterDetailsViewModel is used to validate the user input (attached to this
+            // Fragment's lifecycle)
+            //
+            // They could get combined but for the sake of the codelab, we're separating them so we have
+            // different ViewModels with different lifecycles.
+            this@EnterDetailsFragment.registrationViewModel = registrationViewModel
+            this@EnterDetailsFragment.enterDetailsViewModel = enterDetailsViewModel
+        }
     }
 
     override fun onCreateView(

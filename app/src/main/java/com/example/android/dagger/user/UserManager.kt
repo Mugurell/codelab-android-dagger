@@ -16,7 +16,9 @@
 
 package com.example.android.dagger.user
 
+import android.content.Context
 import com.example.android.dagger.di.Singleton
+import com.example.android.dagger.di.applicationComponent
 import com.example.android.dagger.storage.Storage
 import me.tatarka.inject.annotations.Inject
 
@@ -35,7 +37,7 @@ class UserManager(
     private val storage: Storage,
     // Since UserManager will be in charge of managing the UserComponent lifecycle,
     // it needs to know how to create instances of it
-    private val userComponentFactory: UserComponent.Factory
+    private val appContext: Context
 ) {
 
     /**
@@ -84,6 +86,6 @@ class UserManager(
 
     private fun userJustLoggedIn() {
         // When the user logs in, we create a new instance of UserComponent
-        userComponent = userComponentFactory.create()
+        userComponent = UserComponent.create(appContext.applicationComponent)
     }
 }

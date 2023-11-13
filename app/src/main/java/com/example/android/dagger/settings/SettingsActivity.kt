@@ -16,32 +16,22 @@
 
 package com.example.android.dagger.settings
 
+import ViewModelComponent
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
+import com.example.android.dagger.di.applicationComponent
 import com.example.android.dagger.login.LoginActivity
-import javax.inject.Inject
+import create
 
 class SettingsActivity : AppCompatActivity() {
-
-    // @Inject annotated fields will be provided by kotlin-inject
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var settingsViewModel: SettingsViewModel
+    private val settingsViewModel: SettingsViewModel by lazy(LazyThreadSafetyMode.NONE) {
+        ViewModelComponent.create(applicationComponent).get<SettingsViewModel>(this).value
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        // Gets the userManager from the application graph to obtain the UserComponent
-        // and gets this Activity injected
-        val userManager = (application as MyApplication).appComponent.userManager()
-        userManager.userComponent!!.inject(this)
-
-        settingsViewModel = ViewModelProvider(this, viewModelFactory).get(SettingsViewModel::class.java)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 

@@ -16,7 +16,6 @@
 
 package com.example.android.dagger.registration.termsandconditions
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,19 +25,12 @@ import androidx.fragment.app.Fragment
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
-import javax.inject.Inject
 
 class TermsAndConditionsFragment : Fragment() {
 
-    // @Inject annotated fields will be provided by kotlin-inject
-    @Inject
-    lateinit var registrationViewModel: RegistrationViewModel
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        // Grabs the registrationComponent from the Activity and injects this Fragment
-        (activity as RegistrationActivity).registrationComponent.inject(this)
+    // Grabs the registrationComponent from the Activity and injects this Fragment
+    private val registrationViewModel: RegistrationViewModel by lazy {
+        (activity as RegistrationActivity).registrationComponent.registrationViewModel
     }
 
     override fun onCreateView(
