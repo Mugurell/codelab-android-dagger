@@ -16,9 +16,8 @@
 
 package com.example.android.dagger.user
 
+import com.example.android.dagger.di.Singleton
 import com.example.android.dagger.storage.Storage
-import javax.inject.Inject
-import javax.inject.Singleton
 
 private const val REGISTERED_USER = "registered_user"
 private const val PASSWORD_SUFFIX = "password"

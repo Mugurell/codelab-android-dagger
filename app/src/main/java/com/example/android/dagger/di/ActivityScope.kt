@@ -16,7 +16,7 @@
 
 package com.example.android.dagger.di
 
-import javax.inject.Scope
+import me.tatarka.inject.annotations.Scope
 
 @Scope
 @MustBeDocumented

@@ -22,7 +22,6 @@ import com.example.android.dagger.registration.RegistrationComponent
 import com.example.android.dagger.user.UserManager
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Singleton
 
 // Scope annotation that the AppComponent uses
 // Classes annotated with @Singleton will have a unique instance in this Component
