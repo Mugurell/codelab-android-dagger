@@ -7,11 +7,12 @@ import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
-import javax.inject.Inject
+import me.tatarka.inject.annotations.Inject
 import javax.inject.Provider
 import kotlin.reflect.KClass
 
-class ViewModelFactory @Inject constructor(
+@Inject
+class ViewModelFactory(
     private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")

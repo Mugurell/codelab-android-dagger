@@ -16,7 +16,7 @@
 
 package com.example.android.dagger.user
 
-import javax.inject.Inject
+import me.tatarka.inject.annotations.Inject
 import kotlin.random.Random
 
 /**
@@ -26,7 +26,8 @@ import kotlin.random.Random
  * @LoggedUserScope (i.e. only UserComponent in this case).
  */
 @LoggedUserScope
-class UserDataRepository @Inject constructor(private val userManager: UserManager) {
+@Inject
+class UserDataRepository(private val userManager: UserManager) {
 
     val username: String
         get() = userManager.username

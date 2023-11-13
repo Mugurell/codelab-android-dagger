@@ -19,12 +19,13 @@ package com.example.android.dagger.settings
 import androidx.lifecycle.ViewModel
 import com.example.android.dagger.user.UserDataRepository
 import com.example.android.dagger.user.UserManager
-import javax.inject.Inject
+import me.tatarka.inject.annotations.Inject
 
 /**
  * SettingsViewModel is the ViewModel that [SettingsActivity] uses to handle complex logic.
  */
-class SettingsViewModel @Inject constructor(
+@Inject
+class SettingsViewModel(
     private val userDataRepository: UserDataRepository,
     private val userManager: UserManager
 ): ViewModel() {

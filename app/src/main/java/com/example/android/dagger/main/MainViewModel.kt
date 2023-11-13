@@ -17,7 +17,7 @@
 package com.example.android.dagger.main
 
 import com.example.android.dagger.user.UserDataRepository
-import javax.inject.Inject
+import me.tatarka.inject.annotations.Inject
 
 /**
  * MainViewModel is the ViewModel that [MainActivity] uses to
@@ -26,7 +26,8 @@ import javax.inject.Inject
  * @Inject tells kotlin-inject how to provide instances of this type. kotlin-inject also knows
  * that UserDataRepository is a dependency.
  */
-class MainViewModel @Inject constructor(private val userDataRepository: UserDataRepository) {
+@Inject
+class MainViewModel(private val userDataRepository: UserDataRepository) {
 
     val welcomeText: String
         get() = "Hello ${userDataRepository.username}!"

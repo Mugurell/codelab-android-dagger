@@ -18,7 +18,7 @@ package com.example.android.dagger.registration
 
 import com.example.android.dagger.di.ActivityScope
 import com.example.android.dagger.user.UserManager
-import javax.inject.Inject
+import me.tatarka.inject.annotations.Inject
 
 /**
  * RegistrationViewModel is the ViewModel that the Registration flow ([RegistrationActivity]
@@ -28,7 +28,8 @@ import javax.inject.Inject
  * that UserManager is a dependency.
  */
 @ActivityScope
-class RegistrationViewModel @Inject constructor(val userManager: UserManager) {
+@Inject
+class RegistrationViewModel(val userManager: UserManager) {
 
     private var username: String? = null
     private var password: String? = null

@@ -18,6 +18,7 @@ package com.example.android.dagger.user
 
 import com.example.android.dagger.di.Singleton
 import com.example.android.dagger.storage.Storage
+import me.tatarka.inject.annotations.Inject
 
 private const val REGISTERED_USER = "registered_user"
 private const val PASSWORD_SUFFIX = "password"
@@ -29,7 +30,8 @@ private const val PASSWORD_SUFFIX = "password"
  * Marked with @Singleton since we only one an instance of UserManager in the application graph.
  */
 @Singleton
-class UserManager @Inject constructor(
+@Inject
+class UserManager(
     private val storage: Storage,
     // Since UserManager will be in charge of managing the UserComponent lifecycle,
     // it needs to know how to create instances of it

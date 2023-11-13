@@ -16,9 +16,10 @@
 
 package com.example.android.dagger.storage
 
-import javax.inject.Inject
+import me.tatarka.inject.annotations.Inject
 
-class FakeStorage @Inject constructor(): Storage {
+@Inject
+class FakeStorage: Storage {
 
     private val map = mutableMapOf<String, String>()
 
