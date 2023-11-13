@@ -17,21 +17,16 @@
 package com.example.android.dagger.login
 
 import com.example.android.dagger.di.ActivityScope
-import dagger.Subcomponent
+import com.example.android.dagger.di.AppComponent
+import me.tatarka.inject.annotations.Component
 
 // Scope annotation that the LoginComponent uses
 // Classes annotated with @ActivityScope will have a unique instance in this Component
 @ActivityScope
 // Definition of a kotlin-inject subcomponent
-@Subcomponent
-interface LoginComponent {
+@Component
+abstract class LoginComponent(@Component val parent: AppComponent) {
+    abstract val loginViewModel: LoginViewModel
 
-    // Factory to create instances of LoginComponent
-    @Subcomponent.Factory
-    interface Factory {
-        fun create(): LoginComponent
-    }
-
-    // Classes that can be injected by this Component
-    fun inject(activity: LoginActivity)
+    companion object
 }

@@ -16,25 +16,17 @@
 
 package com.example.android.dagger.user
 
-import com.example.android.dagger.di.ViewModelModule
-import com.example.android.dagger.main.MainActivity
-import com.example.android.dagger.settings.SettingsActivity
-import dagger.Subcomponent
+import com.example.android.dagger.di.AppComponent
+import com.example.android.dagger.main.MainViewModel
+import me.tatarka.inject.annotations.Component
 
 // Scope annotation that the UserComponent uses
 // Classes annotated with @LoggedUserScope will have a unique instance in this Component
 @LoggedUserScope
 // Definition of a kotlin-inject subcomponent
-@Subcomponent(modules = [ViewModelModule::class])
-interface UserComponent {
+@Component
+abstract class UserComponent(@Component val parent: AppComponent) {
+    abstract val mainViewModel: MainViewModel
 
-    // Factory to create instances of UserComponent
-    @Subcomponent.Factory
-    interface Factory {
-        fun create(): UserComponent
-    }
-
-    // Classes that can be injected by this Component
-    fun inject(activity: MainActivity)
-    fun inject(activity: SettingsActivity)
+    companion object
 }

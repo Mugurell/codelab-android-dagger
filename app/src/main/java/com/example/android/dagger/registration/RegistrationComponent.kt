@@ -17,25 +17,18 @@
 package com.example.android.dagger.registration
 
 import com.example.android.dagger.di.ActivityScope
-import com.example.android.dagger.registration.enterdetails.EnterDetailsFragment
-import com.example.android.dagger.registration.termsandconditions.TermsAndConditionsFragment
-import dagger.Subcomponent
+import com.example.android.dagger.di.AppComponent
+import com.example.android.dagger.registration.enterdetails.EnterDetailsViewModel
+import me.tatarka.inject.annotations.Component
 
 // Scope annotation that the RegistrationComponent uses
 // Classes annotated with @ActivityScope will have a unique instance in this Component
 @ActivityScope
 // Definition of a kotlin-inject subcomponent
-@Subcomponent
-interface RegistrationComponent {
+@Component
+abstract class RegistrationComponent(@Component val parent: AppComponent) {
+    abstract val registrationViewModel: RegistrationViewModel
+    abstract val enterDetailsViewModel: EnterDetailsViewModel
 
-    // Factory to create instances of RegistrationComponent
-    @Subcomponent.Factory
-    interface Factory {
-        fun create(): RegistrationComponent
-    }
-
-    // Classes that can be injected by this Component
-    fun inject(activity: RegistrationActivity)
-    fun inject(fragment: EnterDetailsFragment)
-    fun inject(fragment: TermsAndConditionsFragment)
+    companion object
 }

@@ -18,14 +18,10 @@ package com.example.android.dagger.di
 
 import com.example.android.dagger.storage.SharedPreferencesStorage
 import com.example.android.dagger.storage.Storage
-import dagger.Binds
-import dagger.Module
+import me.tatarka.inject.annotations.Provides
 
-// Tells kotlin-inject this is a kotlin-inject module
-@Module
-abstract class StorageModule {
-
+interface StorageComponent {
     // Makes kotlin-inject provide SharedPreferencesStorage when a Storage type is requested
-    @Binds
-    abstract fun provideStorage(storage: SharedPreferencesStorage): Storage
+    @Provides
+    fun SharedPreferencesStorage.bind(): Storage = this
 }

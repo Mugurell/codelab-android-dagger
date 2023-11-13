@@ -28,7 +28,7 @@ import me.tatarka.inject.annotations.Provides
 @Component
 abstract class AppComponent(
     @get:Provides val context: Context
-) {
+) : StorageComponent {
     abstract val userManager: UserManager
 
     companion object
