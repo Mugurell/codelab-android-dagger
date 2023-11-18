@@ -16,16 +16,35 @@
 
 package com.example.android.dagger.di
 
+import android.content.Context
 import com.example.android.dagger.storage.SharedPreferencesStorage
 import com.example.android.dagger.storage.Storage
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
+import javax.inject.Named
+import javax.inject.Qualifier
+
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class SettingsStorage
+
+const val DATA_STORAGE = "DI_DATA_STORAGE_ID"
+
 
 // Tells Dagger this is a Dagger module
 @Module
-abstract class StorageModule {
+class StorageModule {
 
     // Makes Dagger provide SharedPreferencesStorage when a Storage type is requested
-    @Binds
-    abstract fun provideStorage(storage: SharedPreferencesStorage): Storage
+    @SettingsStorage
+    @Provides
+    fun provideSettingsStorage(context: Context): Storage {
+        return SharedPreferencesStorage(context, "Dagger")
+    }
+
+    @Named(DATA_STORAGE)
+    @Provides
+    fun provideLoginStorage(context: Context): Storage {
+        return SharedPreferencesStorage(context, "Data")
+    }
 }

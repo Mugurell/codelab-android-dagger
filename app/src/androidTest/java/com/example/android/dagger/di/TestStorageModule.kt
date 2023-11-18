@@ -26,6 +26,7 @@ import dagger.Module
 abstract class TestStorageModule {
 
     // Makes Dagger provide FakeStorage when a Storage type is requested
+    @SettingsStorage
     @Binds
     abstract fun provideStorage(storage: FakeStorage): Storage
 }
