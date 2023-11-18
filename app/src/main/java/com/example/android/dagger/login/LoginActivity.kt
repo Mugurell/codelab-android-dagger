@@ -33,9 +33,8 @@ import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
-    // @Inject annotated fields will be provided by Dagger
-    @Inject
-    lateinit var loginViewModel: LoginViewModel
+    // fields will be provided by Dagger
+    private lateinit var loginViewModel: LoginViewModel
 
     private lateinit var errorTextView: TextView
 
@@ -60,6 +59,11 @@ class LoginActivity : AppCompatActivity() {
 
         errorTextView = findViewById(R.id.error)
         setupViews()
+    }
+
+    @Inject
+    fun setupViewModel(viewModel: LoginViewModel) {
+        loginViewModel = viewModel
     }
 
     private fun setupViews() {
