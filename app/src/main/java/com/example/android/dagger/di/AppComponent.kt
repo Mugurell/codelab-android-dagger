@@ -24,18 +24,24 @@ import dagger.Component
 
 // Scope annotation that the AppComponent uses
 // Classes also using "@SingleIn(AppScope::class)" will have a unique instance in this Component
-// Definition of a Dagger component that will collect info from all other modules and components
-// which use the "AppScope" marker to provide new dependencies to the top level of the graph
+// Definition of a Dagger component that adds info from all other modules and components
+// which use the "AppScope" marker to provide new dependencies to the graph
 @SingleIn(AppScope::class)
 @MergeComponent(AppScope::class)
-interface AppComponent {
+interface ProductionAppComponent: AppComponent {
 
     // Factory to create instances of the AppComponent
     @Component.Factory
     interface Factory {
         // With @BindsInstance, the Context passed in will be available in the graph
-        fun create(@BindsInstance context: Context): AppComponent
+        fun create(@BindsInstance context: Context): ProductionAppComponent
     }
+}
 
+interface AppComponent {
+    // Types that can be retrieved from the graph
+    // fun registrationComponent(): RegistrationComponent.Factory
+    // fun loginComponent(): LoginComponent.Factory
+    // fun userManager(): UserManager
     fun userManager(): UserManager
 }

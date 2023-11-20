@@ -16,11 +16,10 @@
 
 package com.example.android.dagger.di
 
-import dagger.Component
-import javax.inject.Singleton
+import com.squareup.anvil.annotations.MergeComponent
 
 // Replacement for AppComponent in android tests
-@Singleton
 // Includes TestStorageModule that overrides objects provided in StorageModule
-@Component(modules = [TestStorageModule::class, AppSubcomponents::class])
+@SingleIn(AppScope::class)
+@MergeComponent(AppScope::class)
 interface TestAppComponent : AppComponent

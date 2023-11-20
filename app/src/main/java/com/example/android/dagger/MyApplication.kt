@@ -18,7 +18,7 @@ package com.example.android.dagger
 
 import android.app.Application
 import com.example.android.dagger.di.AppComponent
-import com.example.android.dagger.di.DaggerAppComponent
+import com.example.android.dagger.di.DaggerProductionAppComponent
 
 open class MyApplication : Application() {
 
@@ -30,6 +30,6 @@ open class MyApplication : Application() {
     open fun initializeComponent(): AppComponent {
         // Creates an instance of AppComponent using its Factory constructor
         // We pass the applicationContext that will be used as Context in the graph
-        return DaggerAppComponent.factory().create(applicationContext)
+        return DaggerProductionAppComponent.factory().create(applicationContext)
     }
 }

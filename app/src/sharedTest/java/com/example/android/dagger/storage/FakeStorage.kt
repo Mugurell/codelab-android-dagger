@@ -16,8 +16,14 @@
 
 package com.example.android.dagger.storage
 
+import com.example.android.dagger.di.AppScope
+import com.example.android.dagger.di.SingleIn
+import com.squareup.anvil.annotations.ContributesBinding
 import javax.inject.Inject
 
+@SettingsStorage
+@SingleIn(AppScope::class)
+@ContributesBinding(AppScope::class, replaces = [SharedPreferencesStorage::class])
 class FakeStorage @Inject constructor(): Storage {
 
     private val map = mutableMapOf<String, String>()
