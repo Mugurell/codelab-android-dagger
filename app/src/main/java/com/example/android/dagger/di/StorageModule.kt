@@ -21,13 +21,8 @@ import com.example.android.dagger.storage.SharedPreferencesStorage
 import com.example.android.dagger.storage.Storage
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
-import dagger.Provides
+import javax.inject.Inject
 import javax.inject.Named
-import javax.inject.Qualifier
-
-@Retention(AnnotationRetention.BINARY)
-@Qualifier
-annotation class SettingsStorage
 
 const val DATA_STORAGE = "DI_DATA_STORAGE_ID"
 
@@ -38,15 +33,9 @@ const val DATA_STORAGE = "DI_DATA_STORAGE_ID"
 class StorageModule {
 
     // Makes Dagger provide SharedPreferencesStorage when a Storage type is requested
-    @SettingsStorage
-    @Provides
-    fun provideSettingsStorage(context: Context): Storage {
-        return SharedPreferencesStorage(context, "Dagger")
-    }
-
     @Named(DATA_STORAGE)
-    @Provides
+    @Inject
     fun provideLoginStorage(context: Context): Storage {
-        return SharedPreferencesStorage(context, "Data")
+        return SharedPreferencesStorage(context)
     }
 }

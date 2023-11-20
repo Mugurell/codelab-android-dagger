@@ -17,8 +17,8 @@
 package com.example.android.dagger.user
 
 import com.example.android.dagger.di.AppScope
-import com.example.android.dagger.di.SettingsStorage
 import com.example.android.dagger.di.SingleIn
+import com.example.android.dagger.storage.SettingsStorage
 import com.example.android.dagger.storage.Storage
 import javax.inject.Inject
 

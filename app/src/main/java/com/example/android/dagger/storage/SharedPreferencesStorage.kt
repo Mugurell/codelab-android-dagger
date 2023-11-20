@@ -17,11 +17,23 @@
 package com.example.android.dagger.storage
 
 import android.content.Context
+import com.example.android.dagger.di.AppScope
+import com.example.android.dagger.di.SingleIn
+import com.squareup.anvil.annotations.ContributesBinding
+import javax.inject.Inject
+import javax.inject.Qualifier
+
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class SettingsStorage
 
 // @Inject tells Dagger how to provide instances of this type
-class SharedPreferencesStorage(context: Context, name: String) : Storage {
+@SettingsStorage
+@ContributesBinding(AppScope::class)
+@SingleIn(AppScope::class)
+class SharedPreferencesStorage @Inject constructor(context: Context) : Storage {
 
-    private val sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)
+    private val sharedPreferences = context.getSharedPreferences("Dagger", Context.MODE_PRIVATE)
 
     override fun setString(key: String, value: String) {
         with(sharedPreferences.edit()) {
