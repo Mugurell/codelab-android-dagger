@@ -86,6 +86,8 @@ dependencies {
 
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.auto.service:auto-service-annotations:1.1.1"
+    implementation "com.squareup.anvil:compiler-utils:2.4.4"
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:4.4.0'
