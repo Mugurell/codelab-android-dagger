@@ -19,6 +19,7 @@ package com.example.android.dagger.di
 import android.content.Context
 import com.example.android.dagger.storage.SharedPreferencesStorage
 import com.example.android.dagger.storage.Storage
+import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -31,7 +32,8 @@ annotation class SettingsStorage
 const val DATA_STORAGE = "DI_DATA_STORAGE_ID"
 
 
-// Tells Dagger this is a Dagger module
+// Tells Dagger this is is a collection of dependencies to be added to the AppScope component.
+@ContributesTo(AppScope::class)
 @Module
 class StorageModule {
 

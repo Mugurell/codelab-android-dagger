@@ -16,10 +16,11 @@
 
 package com.example.android.dagger.user
 
+import com.example.android.dagger.di.AppScope
 import com.example.android.dagger.di.SettingsStorage
+import com.example.android.dagger.di.SingleIn
 import com.example.android.dagger.storage.Storage
 import javax.inject.Inject
-import javax.inject.Singleton
 
 private const val REGISTERED_USER = "registered_user"
 private const val PASSWORD_SUFFIX = "password"
@@ -30,7 +31,7 @@ private const val PASSWORD_SUFFIX = "password"
  *
  * Marked with @Singleton since we only one an instance of UserManager in the application graph.
  */
-@Singleton
+@SingleIn(AppScope::class)
 class UserManager @Inject constructor(
     @SettingsStorage val storage: Storage,
     // Since UserManager will be in charge of managing the UserComponent lifecycle,
@@ -39,10 +40,10 @@ class UserManager @Inject constructor(
 ) {
 
     /**
-    *  UserComponent is specific to a logged in user. Holds an instance of UserComponent.
-    *  This determines if the user is logged in or not, when the user logs in,
-    *  a new Component will be created. When the user logs out, this will be null.
-    */
+     *  UserComponent is specific to a logged in user. Holds an instance of UserComponent.
+     *  This determines if the user is logged in or not, when the user logs in,
+     *  a new Component will be created. When the user logs out, this will be null.
+     */
     var userComponent: UserComponent? = null
         private set
 

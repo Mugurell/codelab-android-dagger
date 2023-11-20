@@ -16,6 +16,8 @@
 
 package com.example.android.dagger.user
 
+import com.example.android.dagger.di.AppScope
+import com.example.android.dagger.di.SingleIn
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -25,7 +27,7 @@ import kotlin.random.Random
  * This object will have a unique instance in a Component that is annotated with
  * @LoggedUserScope (i.e. only UserComponent in this case).
  */
-@LoggedUserScope
+@SingleIn(AppScope::class)
 class UserDataRepository @Inject constructor(private val userManager: UserManager) {
 
     val username: String
