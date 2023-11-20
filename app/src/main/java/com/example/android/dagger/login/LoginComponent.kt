@@ -17,19 +17,27 @@
 package com.example.android.dagger.login
 
 import com.example.android.dagger.di.ActivityScope
-import dagger.Subcomponent
+import com.example.android.dagger.di.AppScope
+import com.example.android.dagger.di.SingleIn
+import com.squareup.anvil.annotations.ContributesSubcomponent
+import com.squareup.anvil.annotations.ContributesTo
 
 // Scope annotation that the LoginComponent uses
 // Classes annotated with @ActivityScope will have a unique instance in this Component
-@ActivityScope
 // Definition of a Dagger subcomponent
-@Subcomponent
+@ContributesSubcomponent(scope = ActivityScope::class, parentScope = AppScope::class)
+@SingleIn(ActivityScope::class)
 interface LoginComponent {
 
     // Factory to create instances of LoginComponent
-    @Subcomponent.Factory
+    @ContributesSubcomponent.Factory
     interface Factory {
         fun create(): LoginComponent
+    }
+
+    @ContributesTo(AppScope::class)
+    interface Parent {
+        fun loginComponentFactory(): Factory
     }
 
     // Classes that can be injected by this Component

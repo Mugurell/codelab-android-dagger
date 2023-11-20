@@ -17,21 +17,29 @@
 package com.example.android.dagger.registration
 
 import com.example.android.dagger.di.ActivityScope
+import com.example.android.dagger.di.AppScope
+import com.example.android.dagger.di.SingleIn
 import com.example.android.dagger.registration.enterdetails.EnterDetailsFragment
 import com.example.android.dagger.registration.termsandconditions.TermsAndConditionsFragment
-import dagger.Subcomponent
+import com.squareup.anvil.annotations.ContributesSubcomponent
+import com.squareup.anvil.annotations.ContributesTo
 
 // Scope annotation that the RegistrationComponent uses
 // Classes annotated with @ActivityScope will have a unique instance in this Component
-@ActivityScope
 // Definition of a Dagger subcomponent
-@Subcomponent
+@ContributesSubcomponent(scope = ActivityScope::class, parentScope = AppScope::class)
+@SingleIn(ActivityScope::class)
 interface RegistrationComponent {
 
     // Factory to create instances of RegistrationComponent
-    @Subcomponent.Factory
+    @ContributesSubcomponent.Factory
     interface Factory {
         fun create(): RegistrationComponent
+    }
+
+    @ContributesTo(AppScope::class)
+    interface Parent {
+        fun registrationComponentFactory(): Factory
     }
 
     // Classes that can be injected by this Component

@@ -17,18 +17,17 @@
 package com.example.android.dagger.di
 
 import android.content.Context
-import com.example.android.dagger.login.LoginComponent
-import com.example.android.dagger.registration.RegistrationComponent
 import com.example.android.dagger.user.UserManager
+import com.squareup.anvil.annotations.MergeComponent
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Singleton
 
 // Scope annotation that the AppComponent uses
-// Classes annotated with @Singleton will have a unique instance in this Component
-@Singleton
-// Definition of a Dagger component that adds info from the different modules to the graph
-@Component(modules = [StorageModule::class, AppSubcomponents::class])
+// Classes also using "@SingleIn(AppScope::class)" will have a unique instance in this Component
+// Definition of a Dagger component that will collect info from all other modules and components
+// which use the "AppScope" marker to provide new dependencies to the top level of the graph
+@SingleIn(AppScope::class)
+@MergeComponent(AppScope::class)
 interface AppComponent {
 
     // Factory to create instances of the AppComponent
@@ -38,8 +37,5 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-    // Types that can be retrieved from the graph
-    fun registrationComponent(): RegistrationComponent.Factory
-    fun loginComponent(): LoginComponent.Factory
     fun userManager(): UserManager
 }
