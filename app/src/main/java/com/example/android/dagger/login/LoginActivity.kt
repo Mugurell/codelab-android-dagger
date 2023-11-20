@@ -42,7 +42,10 @@ class LoginActivity : AppCompatActivity() {
 
         // Creates an instance of Login component by grabbing the factory from the app graph
         // and injects this activity to that Component
-        (application as MyApplication).appComponent.loginComponent().create().inject(this)
+        ((application as MyApplication).appComponent as LoginComponent.Parent)
+            .loginComponentFactory().create()
+            .inject(this)
+
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)

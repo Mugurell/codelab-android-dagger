@@ -38,8 +38,8 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         // Creates an instance of Registration component by grabbing the factory from the app graph
-        registrationComponent = (application as MyApplication).appComponent
-            .registrationComponent().create()
+        registrationComponent = ((application as MyApplication).appComponent as RegistrationComponent.Parent)
+            .registrationComponentFactory().create()
 
         // Injects this activity to the just created Registration component
         registrationComponent.inject(this)
